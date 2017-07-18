@@ -16,25 +16,21 @@ puts "Тест содержит возможность определить ур
      "Отвечать на вопросы следует используя три варианта ответа \n" \
      "да = 1, иногда = 2 и нет = 3"
 
-
 current_path = File.dirname(__FILE__)
-file_anser = current_path + "/data/anser.txt"
+file_answer = current_path + "/data/anser.txt"
 file_question = current_path + "/data/question.txt"
 
-if File.exist?(file_anser)
-  f = File.new(file_anser, "r:UTF-8")
-  answers = f.readlines
-  f.close
-else
-  abort "файл anser.txt по такому пути #{file_anser} не найден ..."
+def check_file_and_read_array(file_path)
+  if File.exist?(file_path)
+    f = File.new(file_path, "r:UTF-8")
+    array = f.readlines
+    f.close
+  else
+    abort "файл anser.txt по такому пути #{file_path} не найден ..."
+  end
+
+  array
 end
 
-if File.exist?(file_question)
-  f = File.new(file_question, "r:UTF-8")
-  questions = f.readlines
-  f.close
-else
-  abort "файл question.txt по такому пути #{file_question} не найден ..."
-end
-
-result_print.result_print(test.test_questions(questions), answers)
+result_print.result_print(test.test_questions(check_file_and_read_array(file_question)),
+                          check_file_and_read_array(file_answer))
