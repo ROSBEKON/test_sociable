@@ -20,17 +20,5 @@ current_path = File.dirname(__FILE__)
 file_answer = current_path + "/data/anser.txt"
 file_question = current_path + "/data/question.txt"
 
-def check_file_and_read_array(file_path)
-  if File.exist?(file_path)
-    f = File.new(file_path, "r:UTF-8")
-    array = f.readlines
-    f.close
-  else
-    abort "файл anser.txt по такому пути #{file_path} не найден ..."
-  end
-
-  array
-end
-
-result_print.result_print(test.test_questions(check_file_and_read_array(file_question)),
-                          check_file_and_read_array(file_answer))
+result_print.result_print(test.test_questions(File.readlines(file_question, encoding: "UTF-8")),
+                          File.readlines(file_answer, encoding: "UTF-8"))

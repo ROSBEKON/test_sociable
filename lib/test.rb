@@ -20,6 +20,6 @@ class Test
       end
     end
 
-    return @user_total
+    @user_total
   end
 end
